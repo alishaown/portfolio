@@ -1,157 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Md Ali Shaown – Gamified Portfolio</n><style>
-    /* Reset & Variables */
-    *{margin:0;padding:0;box-sizing:border-box}
-    :root{
-      --bg:#0e0e1e;
-      --card:#1f1f3a;
-      --fg:#e0e0f0;
-      --muted:#a0a0b0;
-      --accent:#ffcc00;
-      --accent2:#00d4ff;
-      --border:#2a2a44;
-      --shadow:0 8px 24px rgba(0,0,0,0.6);
-      --neon1:#ff4d4d;
-      --neon2:#4dffff;
-      --neon3:#ff4dff;
-      --progress-bg:#2a2a44;
-    }
-    body{
-      background:var(--bg);
-      color:var(--fg);
-      font-family:'Segoe UI',sans-serif;
-      line-height:1.5;
-      overflow-x:hidden;
-      cursor:none; /* hide default cursor */
-    }
-    a{color:var(--accent2);text-decoration:none}
-    h1,h2,h3{font-weight:700}
-    .container{max-width:1000px;margin:0 auto;padding:2rem}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md Shaown | Product Manager</title>
+    <!-- Tailwind CSS CDN for a responsive and modern design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for custom typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for a sleek, responsive design and interactive effects */
+        html {
+            scroll-behavior: smooth;
+            /* Define CSS variables for theme colors */
+            --bg-color: #0F172A;
+            --text-color: #E2E8F0;
+            --primary-color: #38BDF8;
+            --secondary-color: #1E293B;
+            --card-bg: #1E293B;
+            --card-shadow: rgba(0,0,0,0.25);
+        }
+        html[data-theme='light'] {
+            --bg-color: #F1F5F9;
+            --text-color: #1E293B;
+            --primary-color: #0EA5E9;
+            --secondary-color: #CBD5E1;
+            --card-bg: #E2E8F0;
+            --card-shadow: rgba(0,0,0,0.1);
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6" fill="%2338BDF8" /></svg>') 12 12, auto;
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        .font-fira {
+            font-family: 'Fira Code', monospace;
+        }
+        /* Custom typing effect animation for the hero section */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        /* Cursor blink animation for the typing effect */
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--text-color); }
+        }
+        .typing-text {
+            /* This is the key to the typing effect */
+            overflow: hidden;
+            border-right: 0.15em solid var(--text-color); /* The "cursor" */
+            white-space: nowrap; /* Ensures the text stays on one line */
+            animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+        }
+        /* Jiggle animation for skills on hover */
+        @keyframes jiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        .jiggle-on-hover:hover {
+            animation: jiggle 0.5s ease-in-out infinite;
+        }
+        /* Fade-in and slide-up animation for sections on scroll */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card {
+            background-color: var(--card-bg);
+            box-shadow: 0 4px 6px -1px var(--card-shadow), 0 2px 4px -2px var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 15px -3px var(--card-shadow), 0 4px 6px -4px var(--card-shadow);
+        }
+        .card-border-hover {
+            position: relative;
+            z-index: 10;
+        }
+        .card-border-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease-in-out;
+        }
+        .card-border-hover:hover::before {
+            transform: scaleX(1);
+        }
+        /* New Timeline-specific styles */
+        .timeline {
+            position: relative;
+            margin: 0 auto;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--secondary-color);
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 1rem 0 1rem 3rem;
+        }
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+            padding: 1rem 3rem 1rem 0;
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        .timeline-item .circle {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            border: 4px solid var(--bg-color);
+            z-index: 20;
+        }
+        .timeline-item:nth-child(odd) .circle {
+            right: -0.75rem;
+        }
+        .timeline-item:nth-child(even) .circle {
+            left: -0.75rem;
+        }
+        .timeline-content {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px var(--card-shadow);
+        }
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 1.25rem;
+                transform: translateX(-50%);
+            }
+            .timeline-item {
+                width: 100%;
+                padding: 1rem 0 1rem 3rem;
+                left: 0;
+                text-align: left;
+            }
+            .timeline-item:nth-child(odd) {
+                padding: 1rem 0 1rem 3rem;
+                text-align: left;
+            }
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            .timeline-item .circle {
+                left: 1.25rem;
+                right: auto;
+            }
+        }
+    </style>
+</head>
+<body class="leading-relaxed">
 
-    /* Custom Cursor */
-    .cursor{
-      position:fixed;top:0;left:0;
-      width:20px;height:20px;
-      border:2px solid var(--accent2);
-      border-radius:50%;
-      pointer-events:none;
-      transform:translate(-50%,-50%);
-      transition:width .2s ease,height .2s ease,background .2s ease,border .2s ease;
-      mix-blend-mode:difference;
-      z-index:10000;
-    }
-    /* Enlarge on click */
-    .cursor.active{transform:translate(-50%,-50%) scale(1.5);background:var(--accent2);}
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-opacity-80 backdrop-blur-sm p-4 md:p-6 shadow-lg rounded-b-xl" style="background-color: var(--bg-color); color: var(--text-color);">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <a href="#" class="text-2xl font-poppins font-bold text-primary">MD SHAOWN</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-lg hover:text-primary transition-colors duration-300">About</a>
+                <a href="#experience" class="text-lg hover:text-primary transition-colors duration-300">Experience</a>
+                <a href="#projects" class="text-lg hover:text-primary transition-colors duration-300">Projects</a>
+                <a href="#skills" class="text-lg hover:text-primary transition-colors duration-300">Skills</a>
+                <a href="#certifications" class="text-lg hover:text-primary transition-colors duration-300">Certifications</a>
+                <a href="#contact" class="text-lg hover:text-primary transition-colors duration-300">Contact</a>
+            </div>
+            <!-- Theme toggle button -->
+            <button id="theme-toggle" class="p-2 rounded-full text-text-color hover:bg-secondary transition-colors duration-300">
+                <!-- Moon icon for dark mode -->
+                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+                <!-- Sun icon for light mode -->
+                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+            </button>
+        </div>
+    </nav>
 
-    /* Neon Title */
-    .logo{
-      font-size:2rem;font-weight:900;text-align:center;margin-bottom:1rem;
-      color:var(--neon1);
-      text-shadow:
-        0 0 8px var(--neon1),
-        0 0 16px var(--neon1),
-        0 0 24px var(--neon1);
-    }
+    <!-- Hero Section -->
+    <header class="relative flex items-center justify-center h-screen text-center px-4" style="background-color: var(--bg-color); color: var(--text-color);">
+        <!-- Canvas for the interactive particle animation -->
+        <canvas id="hero-canvas" class="absolute inset-0 w-full h-full z-0"></canvas>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h1 class="font-poppins text-5xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-sky-500">Md Ali Shaown</h1>
+            <p id="typing-container" class="text-lg md:text-2xl text-text-color max-w-2xl mx-auto typing-text"></p>
+        </div>
+    </header>
 
-    /* Hero */
-    .hero{text-align:center;padding:4rem 1rem}
-    .hero h1{font-size:3rem;margin-bottom:.5rem}
-    .subtitle{font-size:1.2rem;color:var(--muted);margin-bottom:2rem}
-    .stats{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
-    .stat{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:1rem 1.5rem;
-      box-shadow:var(--shadow);
-      transition:transform .3s,background .3s;
-      position:relative;
-      animation:floatBG 12s ease-in-out infinite;
-      background-size:400% 400%;
-    }
-    .stat:hover{transform:translateY(-5px) scale(1.03);background:linear-gradient(135deg,var(--neon2),var(--neon3))}
-    .number{font-size:1.8rem;font-weight:800;color:var(--accent)}
-    .label{font-size:.9rem;color:var(--muted)}
+    <!-- Main Content Wrapper -->
+    <main class="container mx-auto px-4 py-16">
 
-    /* Level Bar */
-    .level-container{margin:2rem auto;max-width:400px;text-align:left}
-    .level-label{font-size:1rem;margin-bottom:.5rem}
-    .level-bar{background:var(--progress-bg);border-radius:8px;overflow:hidden;height:16px}
-    .level-fill{width:0;height:100%;background:var(--accent);transition:width 1.5s ease-in-out}
+        <!-- About Me Section -->
+        <section id="about" class="mb-24 py-16 fade-in-up">
+            <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-12 text-primary text-center">About Me</h2>
+            <div class="flex flex-col items-center gap-8">
+                <div class="card p-8 rounded-2xl max-w-2xl text-center">
+                    <p class="text-lg mb-4">
+                        Diligent Product Manager with around 2 years of success in product roadmap development, market research, and data analysis.
+                        I have a proven history of superior market penetration and successful product launches.
+                    </p>
+                    <p class="text-lg">
+                        My expertise lies in optimizing user experience, leading cross-functional teams, and leveraging data to refine product features and strategies.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-    /* Sections */
-    .section-title{
-      text-align:center;font-size:2rem;margin:3rem 0 2rem;
-      color:var(--neon2);
-      text-shadow:0 0 8px var(--neon2);
-    }
+        <!-- Work Experience Section (New Timeline Layout) -->
+        <section id="experience" class="mb-24 py-16 fade-in-up">
+            <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-12 text-primary text-center">Work Experience</h2>
+            <div class="timeline max-w-4xl mx-auto">
+                
+                <!-- Onethread Item -->
+                <div class="timeline-item">
+                    <div class="circle"></div>
+                    <div class="timeline-content">
+                        <h3 class="font-poppins text-2xl font-bold mb-1 text-primary">Product Manager</h3>
+                        <p class="mb-2 font-semibold text-sm">Onethread | Aug 2023 - Present</p>
+                        <ul class="list-disc list-inside text-sm mt-4 space-y-2">
+                            <li>Led a 10-member development team and a UX designer to build and launch "Agency Handy", a SaaS product adopted by 300+ businesses.</li>
+                            <li>Conducted competitor analysis, market research, and client feedback to prioritize features, ensuring 90% on-time delivery using Agile.</li>
+                            <li>Enhanced user experience by optimizing modules, increasing adoption from 10% to 30%, with 100% retention.</li>
+                            <li>Leveraged Microsoft Clarity and UserMaven for user behavior insights to refine product features and user journeys.</li>
+                            <li>Collaborated across stakeholders to maintain product vision and introduced tiered pricing plans.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- TechOps Item -->
+                <div class="timeline-item">
+                    <div class="circle"></div>
+                    <div class="timeline-content">
+                        <h3 class="font-poppins text-2xl font-bold mb-1 text-primary">Major Incident Manager</h3>
+                        <p class="mb-2 font-semibold text-sm">TechOps | Jan 2023 - May 2023</p>
+                        <ul class="list-disc list-inside text-sm mt-4 space-y-2">
+                            <li>Part of a major incident response team for Loblaw, serving over 2,400 stores.</li>
+                            <li>Streamlined escalation procedures, improving communication and efficiency during critical incidents.</li>
+                        </ul>
+                    </div>
+                </div>
 
-    /* About */
-    .about{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:2rem;
-      box-shadow:var(--shadow);
-      animation:floatBG 15s ease-in-out infinite;
-      background-size:400% 400%;
-    }
-    .about p{margin-bottom:1rem;color:var(--fg)}
-    .badge{display:inline-block;margin:.3rem;padding:.4rem .8rem;background:var(--neon3);border-radius:20px;font-size:.85rem}
+                <!-- Trivooz Item -->
+                <div class="timeline-item">
+                    <div class="circle"></div>
+                    <div class="timeline-content">
+                        <h3 class="font-poppins text-2xl font-bold mb-1 text-primary">Web Developer</h3>
+                        <p class="mb-2 font-semibold text-sm">Trivooz | Dec 2015 - Sep 2016</p>
+                        <ul class="list-disc list-inside text-sm mt-4 space-y-2">
+                            <li>Designed and developed custom WordPress websites tailored to small business needs.</li>
+                            <li>Provided continuous website maintenance, including updates, security monitoring, and troubleshooting.</li>
+                            <li>Conducted user training sessions to empower clients in independently managing their websites.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects" class="mb-24 py-16 fade-in-up">
+            <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-12 text-primary text-center">Additional Projects</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                 <!-- GrowAffiliate Card -->
+                <div class="card card-border-hover p-6 rounded-2xl">
+                    <h3 class="font-poppins text-2xl font-bold mb-2 text-primary">GrowAffiliate</h3>
+                    <p class="mb-2" style="color: var(--text-color);">Affiliate Marketing Software</p>
+                    <ul class="list-disc list-inside text-sm">
+                        <li>Conducted market analysis and client communication to define market scope.</li>
+                        <li>Created detailed product requirement documents (PRDs) to guide development.</li>
+                        <li>Collaborated with sales and marketing teams for a successful product launch.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-    /* Quests */
-    .quests{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
-    .quest-card{
-      background:linear-gradient(135deg,var(--card),#2e2e52);
-      background-size:400% 400%;
-      animation:floatBG 18s ease-in-out infinite;
-      border:1px solid var(--border);
-      border-radius:16px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      transition:transform .3s;
-    }
-    .quest-card:hover{transform:translateY(-6px) rotate(-1deg)}
-    .quest-header{
-      padding:1.5rem;
-      background:linear-gradient(135deg,var(--neon1),var(--neon2));
-      color:#111;font-size:1.3rem;font-weight:700;
-    }
-    .quest-body{padding:1.5rem;color:var(--fg)}
-    .xp{font-weight:700;color:var(--accent)}
-    .quest-badge{
-      position:absolute;top:-12px;right:-12px;
-      background:var(--neon3);color:#111;
-      padding:.5rem 1rem;
-      border-radius:50px;
-      font-size:.75rem;text-transform:uppercase;
-      box-shadow:0 0 8px var(--neon3);
-    }
+        <!-- Skills Section (Grouped) -->
+        <section id="skills" class="mb-24 py-16 fade-in-up">
+            <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-8 text-primary text-center">Skills</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product Management Skills -->
+                <div class="card p-6 rounded-2xl">
+                    <h3 class="font-poppins text-xl font-bold mb-4 text-primary">Product Management & Strategy</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Product Market Analysis</span>
+                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Product Growth Strategies</span>
+                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Agile Methodologies</span>
+                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Cross-Functional Collaboration</span>
+                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Customer Engagement Solutions</span>
+                    </div>
+                </div>
 
-    /* Skills */
-    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
-    .skill{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:1rem;box-shadow:var(--shadow);
-      animation:floatBG 14s ease-in-out infinite;
-      background-size:400% 400%;
-    }
-    .skill h4{font-size:1rem;margin-bottom:.5rem}
-    .skill-bar{background:var(--progress-bg);height:10px;border-radius:6px;overflow:hidden}
-    .skill-fill{width:0;height:100%;background:var(--neon2);animation:fillBar 1.2s ease-in-out forwards}
+                <!-- Analytics & Tools Skills -->
+                <div class="card p-6 rounded-2xl">
+                    <h3 class="font-poppins text-xl font-bold mb-4 text-primary">Analytics & Project Tools</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Product Analytics (GA, Clarity, UserMaven)</span>
+                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Project Management (Jira, ClickUp, Asana, Onethread)</span>
+                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Documentation (Coda, Notion)</span>
+                    </div>
+                </div>
 
-    /* Footer */
-    footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.85rem}
+                <!-- Technical Skills -->
+                <div class="card p-6 rounded-2xl">
+                    <h3 class="font-poppins text-xl font-bold mb-4 text-primary">Technical</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Web Development</span>
+                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Wordpress</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    /* Animations */
-    @keyframes floatBG{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-    @keyframes fillBar{to{width:var(--fill)}}
+        <!-- Certifications Section -->
+        <section id="certifications" class="mb-24 py-16 fade-in-up">
+            <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-8 text-primary text-center">Certifications</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- B-JET Card -->
+                <div class="card card-border-hover p-6 rounded-2xl text-center">
+                    <h3 class="font-poppins text-xl font-bold text-primary">B-JET</h3>
+                    <p class="text-sm" style="color: var(--text-color);">Bangladesh Japan IT Engineer Training Program</p>
+                </div>
+                <!-- Google M-site Card -->
+                <div class="card card-border-hover p-6 rounded-2xl text-center">
+                    <h3 class="font-poppins text-xl font-bold text-primary">Google M-site</h3>
+                    <p class="text-sm" style="color: var(--text-color);">Certification</p>
+                </div>
+                <!-- Coursera Agile Card -->
+                <div class="card card-border-hover p-6 rounded-2xl text-center">
+                    <h3 class="font-poppins text-xl font-bold text-primary">Agile with Atlassian Jira</h3>
+                    <p class="text-sm" style="color: var(--text-color);">Coursera</p>
+                </div>
+                <!-- Top-Up It Card -->
+                <div class="card card-border-hover p-6 rounded-2xl text-center">
+                    <h3 class="font-poppins text-xl font-bold text-primary">Web Development</h3>
+                    <p class="text-sm" style="color: var(--text-color);">Top-Up It</p>
+                </div>
+            </div>
+        </section>
 
-    /* Responsive */
-    @media(max-width:600px){.level-container{width:100%
+        <!-- Contact Section -->
+        <section id="contact" class="mb-24 py-16 fade-in-up">
+            <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-8 text-primary text-center">Get in Touch</h2>
+            <div class="max-w-xl mx-auto text-center">
+                <p class="text-lg mb-8">
+                    I'm always open to new opportunities and collaborations. Feel free to reach out via email or connect with me on LinkedIn.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="mailto:alishaown889@gmail.com" class="inline-block px-6 py-3 rounded-full font-poppins text-lg shadow-lg" style="background-color: var(--primary-color); color: var(--secondary-color);">
+                        Email Me
+                    </a>
+                    <a href="https://www.linkedin.com/in/md-ali-shaown-75190298/" target="_blank" class="inline-block px-6 py-3 rounded-full font-poppins text-lg shadow-lg" style="background-color: var(--primary-color); color: var(--secondary-color);">
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 rounded-t-xl" style="background-color: var(--secondary-color);">
+        <p class="text-sm font-fira text-text-color">&copy; 2025 Md Ali Shaown. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript for the theme switcher, typing animation, particle animation, and scroll observer.
+        
+        // Theme Switcher
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            if (theme === 'dark') {
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+            } else {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+        };
+
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // Typing animation
+        window.onload = function() {
+            const typingText = "Product Manager with a passion for building successful products.";
+            const typingContainer = document.getElementById('typing-container');
+            let i = 0;
+            function typeWriter() {
+                if (i < typingText.length) {
+                    typingContainer.innerHTML += typingText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            typeWriter();
+
+            // Particle animation on the canvas
+            const canvas = document.getElementById('hero-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let mouse = { x: null, y: null };
+            const particleCount = 100;
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initParticles();
+            });
+
+            canvas.addEventListener('mousemove', (event) => {
+                mouse.x = event.x;
+                mouse.y = event.y;
+            });
+
+            canvas.addEventListener('mouseout', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedX = Math.random() * 1 - 0.5;
+                    this.speedY = Math.random() * 1 - 0.5;
+                    this.color = document.documentElement.getAttribute('data-theme') === 'dark' ? 'rgb(52, 211, 153)' : 'rgb(0,0,0)';
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                    if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+
+                    if (mouse.x && mouse.y) {
+                        const dx = mouse.x - this.x;
+                        const dy = mouse.y - this.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 100) {
+                            const forceDirectionX = dx / distance;
+                            const forceDirectionY = dy / distance;
+                            const maxForce = 5;
+                            const force = (maxForce * (100 - distance)) / 100;
+                            this.x -= forceDirectionX * force;
+                            this.y -= forceDirectionY * force;
+                        }
+                    }
+                }
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+
+                    for (let j = i; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 100) {
+                            const lineColor = document.documentElement.getAttribute('data-theme') === 'dark' ? 'rgb(52, 211, 153)' : 'rgb(0,0,0)';
+                            ctx.beginPath();
+                            ctx.strokeStyle = `${lineColor.replace('rgb', 'rgba').replace(')', ', ')}${1 - (distance / 100)})`;
+                            ctx.lineWidth = 1;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+            initParticles();
+            animate();
+
+            // Intersection Observer to trigger fade-in animations on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    } else {
+                         // Optional: remove class when it goes out of view
+                         // entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, {
+                rootMargin: "0px",
+                threshold: 0.1 // Triggers when 10% of the element is visible
+            });
+
+            document.querySelectorAll('.fade-in-up').forEach(section => {
+                observer.observe(section);
+            });
+        };
+    </script>
+</body>
+</html>
