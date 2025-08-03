@@ -4,558 +4,1055 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Md Shaown | Product Manager</title>
-    <!-- Tailwind CSS CDN for a responsive and modern design -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for custom typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Poppins:wght@300;400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom CSS for a sleek, responsive design and interactive effects */
+        :root {
+            --electric-blue: #0066ff;
+            --neon-blue: #00d4ff;
+            --cyber-blue: #1e40af;
+            --deep-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --dark-bg: #000000;
+            --card-dark: #111111;
+            --light-bg: #ffffff;
+            --card-light: #f8fafc;
+            --text-dark: #ffffff;
+            --text-light: #000000;
+            --gray-dark: #666666;
+            --gray-light: #999999;
+        }
+
         html {
             scroll-behavior: smooth;
-            /* Define CSS variables for theme colors */
-            --bg-color: #0F172A;
-            --text-color: #E2E8F0;
-            --primary-color: #38BDF8;
-            --secondary-color: #1E293B;
-            --card-bg: #1E293B;
-            --card-shadow: rgba(0,0,0,0.25);
         }
-        html[data-theme='light'] {
-            --bg-color: #F1F5F9;
-            --text-color: #1E293B;
-            --primary-color: #0EA5E9;
-            --secondary-color: #CBD5E1;
-            --card-bg: #E2E8F0;
-            --card-shadow: rgba(0,0,0,0.1);
-        }
+
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6" fill="%2338BDF8" /></svg>') 12 12, auto;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            transition: all 0.5s ease;
         }
-        .font-poppins {
-            font-family: 'Poppins', sans-serif;
+
+        body.light-mode {
+            background: var(--light-bg);
+            color: var(--text-light);
         }
-        .font-fira {
-            font-family: 'Fira Code', monospace;
+
+        .font-space { font-family: 'Space Grotesk', sans-serif; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .font-fira { font-family: 'Fira Code', monospace; }
+
+        /* Blue glow effects */
+        .blue-glow {
+            filter: drop-shadow(0 0 10px var(--electric-blue)) drop-shadow(0 0 20px var(--neon-blue));
         }
-        /* Custom typing effect animation for the hero section */
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
+
+        .blue-text {
+            background: linear-gradient(45deg, var(--electric-blue), var(--neon-blue), var(--cyber-blue));
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease infinite;
         }
-        /* Cursor blink animation for the typing effect */
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--text-color); }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        .typing-text {
-            /* This is the key to the typing effect */
-            overflow: hidden;
-            border-right: 0.15em solid var(--text-color); /* The "cursor" */
-            white-space: nowrap; /* Ensures the text stays on one line */
-            animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
-        }
-        /* Jiggle animation for skills on hover */
-        @keyframes jiggle {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
-        }
-        .jiggle-on-hover:hover {
-            animation: jiggle 0.5s ease-in-out infinite;
-        }
-        /* Fade-in and slide-up animation for sections on scroll */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in-up.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .card {
-            background-color: var(--card-bg);
-            box-shadow: 0 4px 6px -1px var(--card-shadow), 0 2px 4px -2px var(--card-shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 15px -3px var(--card-shadow), 0 4px 6px -4px var(--card-shadow);
-        }
-        .card-border-hover {
-            position: relative;
-            z-index: 10;
-        }
-        .card-border-hover::before {
-            content: '';
+
+        /* Interactive Canvas for Hero Section */
+        #interactive-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: var(--primary-color);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease-in-out;
+            height: 100%;
+            z-index: -1;
         }
-        .card-border-hover:hover::before {
-            transform: scaleX(1);
+
+        /* Cards with enhanced animations */
+        .funky-card {
+            background: var(--card-dark);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(20px);
         }
-        /* New Timeline-specific styles */
+
+        body.light-mode .funky-card {
+            background: var(--card-light);
+            box-shadow: 0 10px 40px rgba(0, 102, 255, 0.1);
+        }
+
+        .funky-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, var(--electric-blue), var(--neon-blue), var(--cyber-blue));
+            border-radius: inherit;
+            padding: 2px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            -webkit-mask-composite: xor;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .funky-card:hover {
+            transform: translateY(-15px) scale(1.03) rotateY(5deg);
+            box-shadow: 0 25px 50px rgba(0, 102, 255, 0.4);
+        }
+
+        .funky-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+
+        .funky-card:hover::after {
+            animation: shine 1s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        /* Enhanced Navigation */
+        .navbar {
+            backdrop-filter: blur(25px);
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid rgba(0, 102, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 102, 255, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-blue));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-2px) scale(1.05);
+            color: var(--neon-blue);
+        }
+
+        /* Enhanced Hero section */
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 7rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            animation: title-entrance 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes title-entrance {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Enhanced typing animation */
+        .typing-container {
+            border-right: 4px solid var(--electric-blue);
+            animation: blink 1.5s infinite;
+            padding-right: 5px;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: var(--electric-blue); }
+            51%, 100% { border-color: transparent; }
+        }
+
+        /* Enhanced sections */
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-blue), var(--cyber-blue));
+            border-radius: 3px;
+            animation: pulse-line 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-line {
+            0%, 100% { opacity: 1; transform: translateX(-50%) scaleX(1); }
+            50% { opacity: 0.7; transform: translateX(-50%) scaleX(1.2); }
+        }
+
+        /* Enhanced skill tags */
+        .skill-tag {
+            background: linear-gradient(135deg, var(--electric-blue), var(--cyber-blue));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .skill-tag:hover::before {
+            left: 100%;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-5px) scale(1.1) rotateZ(2deg);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.5);
+        }
+
+        /* Enhanced Timeline */
         .timeline {
             position: relative;
+            max-width: 1200px;
             margin: 0 auto;
         }
+
         .timeline::before {
             content: '';
             position: absolute;
             left: 50%;
             top: 0;
             bottom: 0;
-            width: 4px;
-            background-color: var(--secondary-color);
+            width: 6px;
+            background: linear-gradient(180deg, var(--electric-blue), var(--neon-blue), var(--cyber-blue));
             transform: translateX(-50%);
+            border-radius: 3px;
+            animation: timeline-glow 3s ease-in-out infinite;
         }
+
+        @keyframes timeline-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 102, 255, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.8); }
+        }
+
         .timeline-item {
             position: relative;
             width: 50%;
-            padding: 1rem 0 1rem 3rem;
+            padding: 2rem;
+            animation: timeline-slide-in 0.8s ease-out;
         }
+
+        @keyframes timeline-slide-in {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         .timeline-item:nth-child(odd) {
             left: 0;
-            text-align: right;
-            padding: 1rem 3rem 1rem 0;
+            padding-right: 4rem;
         }
+
         .timeline-item:nth-child(even) {
             left: 50%;
+            padding-left: 4rem;
+            animation-name: timeline-slide-in-reverse;
         }
-        .timeline-item .circle {
+
+        @keyframes timeline-slide-in-reverse {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-dot {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1.5rem;
-            height: 1.5rem;
+            top: 2rem;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, var(--electric-blue), var(--neon-blue));
             border-radius: 50%;
-            background-color: var(--primary-color);
-            border: 4px solid var(--bg-color);
-            z-index: 20;
+            border: 5px solid var(--dark-bg);
+            z-index: 10;
+            animation: pulse-dot 2s ease-in-out infinite;
         }
-        .timeline-item:nth-child(odd) .circle {
-            right: -0.75rem;
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.7); }
+            50% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(0, 102, 255, 0); }
         }
-        .timeline-item:nth-child(even) .circle {
-            left: -0.75rem;
+
+        body.light-mode .timeline-dot {
+            border-color: var(--light-bg);
         }
-        .timeline-content {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px -1px var(--card-shadow);
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -12px;
         }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -12px;
+        }
+
+        /* Enhanced Buttons */
+        .funky-btn {
+            background: linear-gradient(135deg, var(--electric-blue), var(--cyber-blue));
+            color: white;
+            padding: 15px 35px;
+            border-radius: 35px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            font-size: 1rem;
+        }
+
+        .funky-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .funky-btn:hover::before {
+            left: 100%;
+        }
+
+        .funky-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.5);
+        }
+
+        .funky-btn-outline {
+            border: 3px solid var(--electric-blue);
+            background: transparent;
+            color: var(--electric-blue);
+            padding: 15px 35px;
+            border-radius: 35px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .funky-btn-outline:hover {
+            background: linear-gradient(135deg, var(--electric-blue), var(--cyber-blue));
+            color: white;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.4);
+        }
+
+        /* Enhanced fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        /* Responsive design */
         @media (max-width: 768px) {
             .timeline::before {
-                left: 1.25rem;
-                transform: translateX(-50%);
+                left: 30px;
             }
             .timeline-item {
                 width: 100%;
-                padding: 1rem 0 1rem 3rem;
                 left: 0;
-                text-align: left;
+                padding-left: 70px;
+                padding-right: 20px;
             }
             .timeline-item:nth-child(odd) {
-                padding: 1rem 0 1rem 3rem;
-                text-align: left;
+                padding-left: 70px;
+                padding-right: 20px;
             }
             .timeline-item:nth-child(even) {
                 left: 0;
+                padding-left: 70px;
             }
-            .timeline-item .circle {
-                left: 1.25rem;
-                right: auto;
+            .timeline-dot {
+                left: 17px !important;
+                right: auto !important;
+            }
+            .hero-title {
+                font-size: clamp(2rem, 10vw, 3.5rem);
             }
         }
+
+        /* Cursor effect */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--electric-blue);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+        }
+        .cursor.hover {
+            transform: translate(-50%, -50%) scale(2);
+            background: rgba(0, 102, 255, 0.1);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-blue));
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* Dark/Light mode transition */
+        .bg-gray-800, .bg-black {
+            transition: background-color 0.5s ease;
+        }
+
+        /* Social icon hover effects */
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.2) translateY(-5px);
+            filter: drop-shadow(0 0 10px var(--neon-blue));
+        }
+
     </style>
 </head>
-<body class="leading-relaxed">
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-opacity-80 backdrop-blur-sm p-4 md:p-6 shadow-lg rounded-b-xl" style="background-color: var(--bg-color); color: var(--text-color);">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <a href="#" class="text-2xl font-poppins font-bold text-primary">MD SHAOWN</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="text-lg hover:text-primary transition-colors duration-300">About</a>
-                <a href="#experience" class="text-lg hover:text-primary transition-colors duration-300">Experience</a>
-                <a href="#projects" class="text-lg hover:text-primary transition-colors duration-300">Projects</a>
-                <a href="#skills" class="text-lg hover:text-primary transition-colors duration-300">Skills</a>
-                <a href="#certifications" class="text-lg hover:text-primary transition-colors duration-300">Certifications</a>
-                <a href="#contact" class="text-lg hover:text-primary transition-colors duration-300">Contact</a>
+    <div class="scroll-indicator"></div>
+    <!-- Interactive Canvas for the hero section background -->
+    <canvas id="interactive-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="font-space text-2xl font-bold blue-text">
+                MD SHAOWN
             </div>
-            <!-- Theme toggle button -->
-            <button id="theme-toggle" class="p-2 rounded-full text-text-color hover:bg-secondary transition-colors duration-300">
-                <!-- Moon icon for dark mode -->
-                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-lg font-medium">About</a>
+                <a href="#experience" class="nav-link text-lg font-medium">Experience</a>
+                <a href="#projects" class="nav-link text-lg font-medium">Projects</a>
+                <a href="#skills" class="nav-link text-lg font-medium">Skills</a>
+                <a href="#certifications" class="nav-link text-lg font-medium">Certifications</a>
+                <a href="#contact" class="nav-link text-lg font-medium">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
-                <!-- Sun icon for light mode -->
-                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </button>
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" class="p-3 rounded-full bg-gray-800 hover:bg-gray-700 transition-all duration-300 transform hover:scale-110">
+                <svg id="sun-icon" class="w-6 h-6 text-yellow-400 hidden" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 2L13.09 8.26L20 9L14 14.74L15.18 21.02L10 17.77L4.82 21.02L6 14.74L0 9L6.91 8.26L10 2Z"/>
+                </svg>
+                <svg id="moon-icon" class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
                 </svg>
             </button>
         </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden absolute top-full left-0 w-full bg-black bg-opacity-95 backdrop-blur-lg">
+            <div class="flex flex-col space-y-4 p-6">
+                <a href="#about" class="nav-link text-lg font-medium">About</a>
+                <a href="#experience" class="nav-link text-lg font-medium">Experience</a>
+                <a href="#projects" class="nav-link text-lg font-medium">Projects</a>
+                <a href="#skills" class="nav-link text-lg font-medium">Skills</a>
+                <a href="#certifications" class="nav-link text-lg font-medium">Certifications</a>
+                <a href="#contact" class="nav-link text-lg font-medium">Contact</a>
+            </div>
+        </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="relative flex items-center justify-center h-screen text-center px-4" style="background-color: var(--bg-color); color: var(--text-color);">
-        <!-- Canvas for the interactive particle animation -->
-        <canvas id="hero-canvas" class="absolute inset-0 w-full h-full z-0"></canvas>
-        <div class="relative z-10 max-w-4xl mx-auto">
-            <h1 class="font-poppins text-5xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-sky-500">Md Ali Shaown</h1>
-            <p id="typing-container" class="text-lg md:text-2xl text-text-color max-w-2xl mx-auto typing-text"></p>
-        </div>
-    </header>
-
-    <!-- Main Content Wrapper -->
-    <main class="container mx-auto px-4 py-16">
-
-        <!-- About Me Section -->
-        <section id="about" class="mb-24 py-16 fade-in-up">
-            <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-12 text-primary text-center">About Me</h2>
-            <div class="flex flex-col items-center gap-8">
-                <div class="card p-8 rounded-2xl max-w-2xl text-center">
-                    <p class="text-lg mb-4">
-                        Diligent Product Manager with around 2 years of success in product roadmap development, market research, and data analysis.
-                        I have a proven history of superior market penetration and successful product launches.
-                    </p>
-                    <p class="text-lg">
-                        My expertise lies in optimizing user experience, leading cross-functional teams, and leveraging data to refine product features and strategies.
-                    </p>
+    <!-- Main Content -->
+    <main class="relative z-10">
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen flex items-center justify-center text-center px-4 relative z-0">
+            <div class="relative z-10 max-w-4xl mx-auto">
+                <h1 class="hero-title font-poppins">
+                    Hi, I'm <span class="blue-text">Md Shaown</span>
+                </h1>
+                <p class="font-fira text-xl md:text-2xl mt-4 mb-8 text-gray-400">
+                    I am a <span id="typing-text" class="typing-container text-white"></span>
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="#contact" class="funky-btn">Get In Touch</a>
+                    <a href="#projects" class="funky-btn-outline">View My Work</a>
+                </div>
+                <div class="mt-12 flex justify-center space-x-6">
+                    <!-- Social icons -->
+                    <a href="https://www.linkedin.com/in/md-ali-shaown-75190298/" target="_blank" class="social-icon text-gray-400 hover:text-white transform hover:scale-110 transition-all duration-300">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12c6.627 0 12-5.373 12-12S18.627 0 12 0zm-2.072 17.514V9.458h-3.23V17.514h3.23zM8.361 8.016c-1.127 0-1.87-.783-1.87-1.782-.016-1.015.743-1.798 1.886-1.798 1.144 0 1.887.783 1.887 1.798-.016 1.015-.759 1.782-1.886 1.782zm11.758 9.498h-3.23v-4.996c0-1.22-.436-2.05-1.527-2.05-.83 0-1.32.559-1.545 1.107-.08.196-.098.46-.098.723v5.216h-3.23s.044-8.86 0-9.878h3.23v1.39c.427-.665 1.18-1.61 2.903-1.61 2.112 0 3.738 1.385 3.738 4.351v5.747h-.001z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:alishaown889@gmail.com" class="social-icon text-gray-400 hover:text-white transform hover:scale-110 transition-all duration-300">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12c6.627 0 12-5.373 12-12S18.627 0 12 0zm5.415 7.643c-.234.331-.497.662-.77.962-1.025 1.054-2.137 1.83-3.327 2.378-1.19.549-2.502.73-3.876.549-.854-.125-1.549-.39-2.146-.814-.597-.424-.913-.89-.913-1.396 0-.39.06-.69.18-.9.12-.21.3-.39.54-.54.24-.15.54-.225.9-.225.435 0 .8.12 1.1.36.3.24.45.69.45 1.35 0 .42-.045.75-.135.99-.09.24-.225.39-.405.45-.3.12-.66.135-1.08.045-.51-.09-.96-.3-1.35-.63-.39-.33-.63-.735-.72-1.215-.09-.48-.06-.93.09-1.35.15-.42.42-.78.81-1.08.39-.3.885-.45 1.485-.45 1.485 0 2.655.33 3.51.99.855.66 1.29 1.545 1.305 2.655 0 .75-.24 1.35-.72 1.8z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com" target="_blank" class="social-icon text-gray-400 hover:text-white transform hover:scale-110 transition-all duration-300">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.111.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.34.726-4.043-1.61-4.043-1.61-.546-1.387-1.332-1.758-1.332-1.758-1.09-.745.082-.73.082-.73 1.205.085 1.838 1.238 1.838 1.238 1.07 1.835 2.809 1.305 3.492.997.108-.775.418-1.306.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.383 1.23-3.22-.124-.306-.533-1.524.117-3.176 0 0 1.002-.323 3.288 1.23.953-.264 1.96-.396 2.96-.396s2.008.132 2.96.396c2.284-1.553 3.285-1.23 3.285-1.23.65 1.652.24 2.87.12 3.176.765.837 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.922.43.368.812 1.103.812 2.226 0 1.605-.015 2.89-.015 3.285 0 .32.217.69.825.575C20.565 21.802 24 17.306 24 12c0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- Work Experience Section (New Timeline Layout) -->
-        <section id="experience" class="mb-24 py-16 fade-in-up">
-            <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-12 text-primary text-center">Work Experience</h2>
-            <div class="timeline max-w-4xl mx-auto">
-                
-                <!-- Onethread Item -->
-                <div class="timeline-item">
-                    <div class="circle"></div>
-                    <div class="timeline-content">
-                        <h3 class="font-poppins text-2xl font-bold mb-1 text-primary">Product Manager</h3>
-                        <p class="mb-2 font-semibold text-sm">Onethread | Aug 2023 - Present</p>
-                        <ul class="list-disc list-inside text-sm mt-4 space-y-2">
-                            <li>Led a 10-member development team and a UX designer to build and launch "Agency Handy", a SaaS product adopted by 300+ businesses.</li>
-                            <li>Conducted competitor analysis, market research, and client feedback to prioritize features, ensuring 90% on-time delivery using Agile.</li>
-                            <li>Enhanced user experience by optimizing modules, increasing adoption from 10% to 30%, with 100% retention.</li>
-                            <li>Leveraged Microsoft Clarity and UserMaven for user behavior insights to refine product features and user journeys.</li>
-                            <li>Collaborated across stakeholders to maintain product vision and introduced tiered pricing plans.</li>
-                        </ul>
+        <!-- About Section -->
+        <section id="about" class="py-20 px-4">
+            <div class="container mx-auto">
+                <h2 class="section-title fade-in">About Me</h2>
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-16">
+                    <div class="md:w-1/3 fade-in">
+                        <img src="https://placehold.co/400x400/0066ff/ffffff?text=Md+Shaown" alt="Md Shaown" class="rounded-full blue-glow object-cover w-64 h-64 mx-auto md:mx-0">
+                    </div>
+                    <div class="md:w-2/3 max-w-2xl text-center md:text-left fade-in">
+                        <h3 class="text-3xl font-bold mb-4">Hello There!</h3>
+                        <p class="text-lg text-gray-400 mb-6">
+                            Diligent Product Manager offering around 2 years of success in product roadmap development, market research and data analysis. Driven and strategic with a proven history of superior market penetration and product launch. My background in computer science and web development gives me a unique perspective on bridging the gap between business goals and technical feasibility.
+                        </p>
+                        <a href="#contact" class="funky-btn">Let's Connect</a>
                     </div>
                 </div>
-                
-                <!-- TechOps Item -->
-                <div class="timeline-item">
-                    <div class="circle"></div>
-                    <div class="timeline-content">
-                        <h3 class="font-poppins text-2xl font-bold mb-1 text-primary">Major Incident Manager</h3>
-                        <p class="mb-2 font-semibold text-sm">TechOps | Jan 2023 - May 2023</p>
-                        <ul class="list-disc list-inside text-sm mt-4 space-y-2">
-                            <li>Part of a major incident response team for Loblaw, serving over 2,400 stores.</li>
-                            <li>Streamlined escalation procedures, improving communication and efficiency during critical incidents.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Trivooz Item -->
-                <div class="timeline-item">
-                    <div class="circle"></div>
-                    <div class="timeline-content">
-                        <h3 class="font-poppins text-2xl font-bold mb-1 text-primary">Web Developer</h3>
-                        <p class="mb-2 font-semibold text-sm">Trivooz | Dec 2015 - Sep 2016</p>
-                        <ul class="list-disc list-inside text-sm mt-4 space-y-2">
-                            <li>Designed and developed custom WordPress websites tailored to small business needs.</li>
-                            <li>Provided continuous website maintenance, including updates, security monitoring, and troubleshooting.</li>
-                            <li>Conducted user training sessions to empower clients in independently managing their websites.</li>
-                        </ul>
-                    </div>
-                </div>
-                
             </div>
         </section>
-        
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-20 px-4">
+            <div class="container mx-auto">
+                <h2 class="section-title fade-in">Experience</h2>
+                <div class="timeline">
+                    <!-- Onethread -->
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="funky-card p-6">
+                            <h4 class="text-2xl font-bold blue-text">Product Manager</h4>
+                            <p class="text-lg font-bold text-gray-300">Onethread | Aug 2023 - Present</p>
+                            <ul class="mt-4 text-gray-400 list-disc list-inside">
+                                <li>Led a 10-member development team and a UX designer to build and launch "Agency Handy", a SaaS product adopted by 300+ businesses in 1.5 years.</li>
+                                <li>Conducted competitor analysis, market research, and client feedback to prioritize features, ensuring 90% on-time delivery using Agile methodologies.</li>
+                                <li>Enhanced user experience by optimizing different modules, increasing adoption from 10% to 30%, with 100% retention.</li>
+                                <li>Leveraged Microsoft Clarity and UserMaven for user behavior insights to refine product features and user journeys.</li>
+                                <li>Collaborated across stakeholders, business, and support teams to maintain product vision and introduced tiered pricing plans.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- TechOps -->
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="funky-card p-6">
+                            <h4 class="text-2xl font-bold blue-text">Major Incident Manager</h4>
+                            <p class="text-lg font-bold text-gray-300">TechOps | Jan 2023 - May 2023</p>
+                            <ul class="mt-4 text-gray-400 list-disc list-inside">
+                                <li>Part of major incident response team for Loblaw, serving over 2,400 stores, with an average resolution time of 4 hours.</li>
+                                <li>Streamlined escalation procedures, improving SLA compliance to achieve a 98% incident resolution rate.</li>
+                                <li>Proactively monitored incident queues in ServiceNow, ensuring prompt escalation and resolution of high-priority issues.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Quantanite -->
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="funky-card p-6">
+                            <h4 class="text-2xl font-bold blue-text">Analyst</h4>
+                            <p class="text-lg font-bold text-gray-300">Quantanite | Dec 2020 - Sep 2021</p>
+                            <ul class="mt-4 text-gray-400 list-disc list-inside">
+                                <li>Designed and executed LinkedIn marketing campaigns tailored to client requirements.</li>
+                                <li>Analyzed LinkedIn performance metrics and implemented data-driven optimizations to improve campaign outcomes.</li>
+                                <li>Conducted research on industry trends and competitor strategies to refine content planning and audience engagement.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Trivooz -->
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="funky-card p-6">
+                            <h4 class="text-2xl font-bold blue-text">Web Developer</h4>
+                            <p class="text-lg font-bold text-gray-300">Trivooz | Dec 2015 - Sep 2016</p>
+                            <ul class="mt-4 text-gray-400 list-disc list-inside">
+                                <li>Designed and developed custom WordPress websites tailored to small business needs.</li>
+                                <li>Provided continuous website maintenance, including updates, security monitoring, and troubleshooting.</li>
+                                <li>Conducted user training sessions to empower clients in independently managing their websites.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Projects Section -->
-        <section id="projects" class="mb-24 py-16 fade-in-up">
-            <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-12 text-primary text-center">Additional Projects</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                 <!-- GrowAffiliate Card -->
-                <div class="card card-border-hover p-6 rounded-2xl">
-                    <h3 class="font-poppins text-2xl font-bold mb-2 text-primary">GrowAffiliate</h3>
-                    <p class="mb-2" style="color: var(--text-color);">Affiliate Marketing Software</p>
-                    <ul class="list-disc list-inside text-sm">
-                        <li>Conducted market analysis and client communication to define market scope.</li>
-                        <li>Created detailed product requirement documents (PRDs) to guide development.</li>
-                        <li>Collaborated with sales and marketing teams for a successful product launch.</li>
-                    </ul>
+        <section id="projects" class="py-20 px-4">
+            <div class="container mx-auto">
+                <h2 class="section-title fade-in">Featured Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                    <!-- Project Card: GrowAffiliate -->
+                    <div class="funky-card p-6 fade-in">
+                        <h4 class="text-2xl font-bold blue-text mb-2">GrowAffiliate</h4>
+                        <p class="text-gray-400 mb-4">An affiliate marketing software project with a focus on market analysis and product journey definition.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag">Product Strategy</span>
+                            <span class="skill-tag">Market Analysis</span>
+                            <span class="skill-tag">Project Management</span>
+                        </div>
+                        <a href="#" class="funky-btn-outline">View Details</a>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div class="funky-card p-6 fade-in">
+                        <h4 class="text-2xl font-bold blue-text mb-2">Insight AI</h4>
+                        <p class="text-gray-400 mb-4">An AI-powered analytics platform for small businesses to track customer behavior.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag">AI/ML</span>
+                            <span class="skill-tag">Market Research</span>
+                            <span class="skill-tag">Data Analysis</span>
+                        </div>
+                        <a href="#" class="funky-btn-outline">View Details</a>
+                    </div>
+                    <!-- Project Card 3 -->
+                    <div class="funky-card p-6 fade-in">
+                        <h4 class="text-2xl font-bold blue-text mb-2">Habit Sphere</h4>
+                        <p class="text-gray-400 mb-4">A mobile habit tracker app designed to foster positive behavioral change with gamification.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="skill-tag">Mobile App</span>
+                            <span class="skill-tag">User Engagement</span>
+                            <span class="skill-tag">Gamification</span>
+                        </div>
+                        <a href="#" class="funky-btn-outline">View Details</a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section (Grouped) -->
-        <section id="skills" class="mb-24 py-16 fade-in-up">
-            <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-8 text-primary text-center">Skills</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Product Management Skills -->
-                <div class="card p-6 rounded-2xl">
-                    <h3 class="font-poppins text-xl font-bold mb-4 text-primary">Product Management & Strategy</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Product Market Analysis</span>
-                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Product Growth Strategies</span>
-                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Agile Methodologies</span>
-                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Cross-Functional Collaboration</span>
-                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Customer Engagement Solutions</span>
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 px-4">
+            <div class="container mx-auto">
+                <h2 class="section-title fade-in">My Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Skills Category 1 -->
+                    <div class="funky-card p-6 fade-in">
+                        <h4 class="text-xl font-bold blue-text mb-4">Product Management</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>Product Market Analysis</li>
+                            <li>Product Analytics (Google Analytics)</li>
+                            <li>Agile Methodologies</li>
+                            <li>Product Growth Strategies</li>
+                        </ul>
                     </div>
-                </div>
-
-                <!-- Analytics & Tools Skills -->
-                <div class="card p-6 rounded-2xl">
-                    <h3 class="font-poppins text-xl font-bold mb-4 text-primary">Analytics & Project Tools</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Product Analytics (GA, Clarity, UserMaven)</span>
-                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Project Management (Jira, ClickUp, Asana, Onethread)</span>
-                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Documentation (Coda, Notion)</span>
+                    <!-- Skills Category 2 -->
+                    <div class="funky-card p-6 fade-in">
+                        <h4 class="text-xl font-bold blue-text mb-4">Project & Tools</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>Project Management (Jira, ClickUp)</li>
+                            <li>Documentation (Coda, Notion)</li>
+                            <li>Cross-Functional Collaboration</li>
+                            <li>Customer Engagement Solutions</li>
+                        </ul>
                     </div>
-                </div>
-
-                <!-- Technical Skills -->
-                <div class="card p-6 rounded-2xl">
-                    <h3 class="font-poppins text-xl font-bold mb-4 text-primary">Technical</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Web Development</span>
-                        <span class="text-sm font-bold px-4 py-2 rounded-full jiggle-on-hover" style="background-color: var(--primary-color); color: var(--secondary-color);">Wordpress</span>
+                    <!-- Skills Category 3 -->
+                    <div class="funky-card p-6 fade-in">
+                        <h4 class="text-xl font-bold blue-text mb-4">Technical & Web</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>WordPress Development</li>
+                            <li>Web Maintenance</li>
+                            <li>Basic HTML/CSS/JS</li>
+                        </ul>
+                    </div>
+                    <!-- Skills Category 4 -->
+                    <div class="funky-card p-6 fade-in">
+                        <h4 class="text-xl font-bold blue-text mb-4">Communication</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>English: Professional</li>
+                            <li>Bangla: Native</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Certifications Section -->
-        <section id="certifications" class="mb-24 py-16 fade-in-up">
-            <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-8 text-primary text-center">Certifications</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- B-JET Card -->
-                <div class="card card-border-hover p-6 rounded-2xl text-center">
-                    <h3 class="font-poppins text-xl font-bold text-primary">B-JET</h3>
-                    <p class="text-sm" style="color: var(--text-color);">Bangladesh Japan IT Engineer Training Program</p>
-                </div>
-                <!-- Google M-site Card -->
-                <div class="card card-border-hover p-6 rounded-2xl text-center">
-                    <h3 class="font-poppins text-xl font-bold text-primary">Google M-site</h3>
-                    <p class="text-sm" style="color: var(--text-color);">Certification</p>
-                </div>
-                <!-- Coursera Agile Card -->
-                <div class="card card-border-hover p-6 rounded-2xl text-center">
-                    <h3 class="font-poppins text-xl font-bold text-primary">Agile with Atlassian Jira</h3>
-                    <p class="text-sm" style="color: var(--text-color);">Coursera</p>
-                </div>
-                <!-- Top-Up It Card -->
-                <div class="card card-border-hover p-6 rounded-2xl text-center">
-                    <h3 class="font-poppins text-xl font-bold text-primary">Web Development</h3>
-                    <p class="text-sm" style="color: var(--text-color);">Top-Up It</p>
+        <section id="certifications" class="py-20 px-4">
+            <div class="container mx-auto">
+                <h2 class="section-title fade-in">Certifications</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Certification Card 1 -->
+                    <div class="funky-card p-6 flex items-start space-x-4 fade-in">
+                        <svg class="w-12 h-12 text-neon-blue flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.111a9 9 0 11-12.636 0L4 7m0 7h.01M4 17h.01M4 21h.01M12 4a8 8 0 100 16 8 8 0 000-16z"/>
+                        </svg>
+                        <div>
+                            <h4 class="text-2xl font-bold blue-text">Agile with Atlassian Jira</h4>
+                            <p class="text-gray-400">Coursera</p>
+                        </div>
+                    </div>
+                    <!-- Certification Card 2 -->
+                    <div class="funky-card p-6 flex items-start space-x-4 fade-in">
+                        <svg class="w-12 h-12 text-neon-blue flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3zM21 12c0-4.97-4.03-9-9-9S3 7.03 3 12s4.03 9 9 9 9-4.03 9-9zM4 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8-8-3.582-8-8z"/>
+                        </svg>
+                        <div>
+                            <h4 class="text-2xl font-bold blue-text">Google M-site certification</h4>
+                            <p class="text-gray-400">Google</p>
+                        </div>
+                    </div>
+                     <!-- Certification Card 3 -->
+                    <div class="funky-card p-6 flex items-start space-x-4 fade-in">
+                        <svg class="w-12 h-12 text-neon-blue flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3zM21 12c0-4.97-4.03-9-9-9S3 7.03 3 12s4.03 9 9 9 9-4.03 9-9zM4 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8-8-3.582-8-8z"/>
+                        </svg>
+                        <div>
+                            <h4 class="text-2xl font-bold blue-text">B-JET (Bangladesh Japan IT Engineer Training Program)</h4>
+                            <p class="text-gray-400">B-JET</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="mb-24 py-16 fade-in-up">
-            <h2 class="font-poppins text-4xl md:text-5xl font-bold mb-8 text-primary text-center">Get in Touch</h2>
-            <div class="max-w-xl mx-auto text-center">
-                <p class="text-lg mb-8">
-                    I'm always open to new opportunities and collaborations. Feel free to reach out via email or connect with me on LinkedIn.
-                </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="mailto:alishaown889@gmail.com" class="inline-block px-6 py-3 rounded-full font-poppins text-lg shadow-lg" style="background-color: var(--primary-color); color: var(--secondary-color);">
-                        Email Me
-                    </a>
-                    <a href="https://www.linkedin.com/in/md-ali-shaown-75190298/" target="_blank" class="inline-block px-6 py-3 rounded-full font-poppins text-lg shadow-lg" style="background-color: var(--primary-color); color: var(--secondary-color);">
-                        LinkedIn
-                    </a>
+        <section id="contact" class="py-20 px-4">
+            <div class="container mx-auto text-center">
+                <h2 class="section-title fade-in">Get In Touch</h2>
+                <div class="max-w-xl mx-auto fade-in">
+                    <p class="text-lg text-gray-400 mb-8">
+                        I'm always open to new opportunities and collaborations. Feel free to reach out to me.
+                    </p>
+                    <a href="mailto:alishaown889@gmail.com" class="funky-btn">Send an Email</a>
+                    <p class="mt-4 text-gray-400">
+                        <a href="tel:+8801819460095" class="hover:text-white transition-colors">+8801819460095</a>
+                    </p>
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- Footer -->
-    <footer class="text-center py-8 rounded-t-xl" style="background-color: var(--secondary-color);">
-        <p class="text-sm font-fira text-text-color">&copy; 2025 Md Ali Shaown. All rights reserved.</p>
+    <footer class="bg-black bg-opacity-80 py-8 mt-12 text-center text-gray-400">
+        <p class="font-space">Designed and Built by Md Shaown</p>
     </footer>
 
     <script>
-        // JavaScript for the theme switcher, typing animation, particle animation, and scroll observer.
-        
-        // Theme Switcher
-        const themeToggle = document.getElementById('theme-toggle');
-        const sunIcon = document.getElementById('sun-icon');
-        const moonIcon = document.getElementById('moon-icon');
-
-        const setTheme = (theme) => {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            if (theme === 'dark') {
-                moonIcon.classList.remove('hidden');
-                sunIcon.classList.add('hidden');
-            } else {
-                sunIcon.classList.remove('hidden');
-                moonIcon.classList.add('hidden');
-            }
-        };
-
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        setTheme(currentTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme);
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('a, button, .funky-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
         });
 
-        // Typing animation
-        window.onload = function() {
-            const typingText = "Product Manager with a passion for building successful products.";
-            const typingContainer = document.getElementById('typing-container');
-            let i = 0;
-            function typeWriter() {
-                if (i < typingText.length) {
-                    typingContainer.innerHTML += typingText.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 50);
-                }
+        // Typing effect for hero section
+        const typingText = document.getElementById('typing-text');
+        const textToType = "Product Manager";
+        let charIndex = 0;
+        function type() {
+            if (charIndex < textToType.length) {
+                typingText.textContent += textToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 100);
+            } else {
+                // Restart the animation or stop
             }
-            typeWriter();
+        }
 
-            // Particle animation on the canvas
-            const canvas = document.getElementById('hero-canvas');
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Theme toggle logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        
+        function setTheme(theme) {
+            if (theme === 'light') {
+                document.body.classList.add('light-mode');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                document.body.classList.remove('light-mode');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+            setTheme(currentTheme);
+        });
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme('dark');
+        }
+
+        // Intersection Observer for fade-in animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Scroll indicator functionality
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.querySelector('.scroll-indicator').style.width = scrolled + "%";
+        });
+
+        // Interactive background canvas logic
+        window.onload = function () {
+            const canvas = document.getElementById('interactive-canvas');
             const ctx = canvas.getContext('2d');
-            let particles = [];
             let mouse = { x: null, y: null };
-            const particleCount = 100;
+            const particleArray = [];
 
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            window.addEventListener('resize', () => {
+            // Set canvas size
+            function resizeCanvas() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
-                initParticles();
+            }
+            resizeCanvas();
+
+            // Handle window resizing
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                init();
             });
 
-            canvas.addEventListener('mousemove', (event) => {
-                mouse.x = event.x;
-                mouse.y = event.y;
+            // Mouse event listener
+            window.addEventListener('mousemove', (event) => {
+                mouse.x = event.clientX;
+                mouse.y = event.clientY;
             });
-
-            canvas.addEventListener('mouseout', () => {
+            window.addEventListener('mouseleave', () => {
                 mouse.x = null;
                 mouse.y = null;
             });
 
+            // Particle constructor
             class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 3 + 1;
-                    this.speedX = Math.random() * 1 - 0.5;
-                    this.speedY = Math.random() * 1 - 0.5;
-                    this.color = document.documentElement.getAttribute('data-theme') === 'dark' ? 'rgb(52, 211, 153)' : 'rgb(0,0,0)';
+                constructor(x, y, size, color, weight) {
+                    this.x = x;
+                    this.y = y;
+                    this.size = size;
+                    this.color = color;
+                    this.weight = weight;
+                    this.vx = Math.random() * 2 - 1; // Random velocity for initial movement
+                    this.vy = Math.random() * 2 - 1;
                 }
-                update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
 
-                    if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-                    if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
-
-                    if (mouse.x && mouse.y) {
-                        const dx = mouse.x - this.x;
-                        const dy = mouse.y - this.y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < 100) {
-                            const forceDirectionX = dx / distance;
-                            const forceDirectionY = dy / distance;
-                            const maxForce = 5;
-                            const force = (maxForce * (100 - distance)) / 100;
-                            this.x -= forceDirectionX * force;
-                            this.y -= forceDirectionY * force;
-                        }
-                    }
-                }
                 draw() {
-                    ctx.fillStyle = this.color;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = this.size * 2;
+                    ctx.shadowColor = this.color;
                     ctx.fill();
+                    ctx.closePath();
                 }
-            }
 
-            function initParticles() {
-                particles = [];
-                for (let i = 0; i < particleCount; i++) {
-                    particles.push(new Particle());
-                }
-            }
-            
-            function animate() {
-                requestAnimationFrame(animate);
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                update() {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    const forceDirectionX = dx / distance;
+                    const forceDirectionY = dy / distance;
+                    const maxDistance = 150;
+                    const repulsionFactor = 1.2;
 
-                for (let i = 0; i < particles.length; i++) {
-                    particles[i].update();
-                    particles[i].draw();
-
-                    for (let j = i; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < 100) {
-                            const lineColor = document.documentElement.getAttribute('data-theme') === 'dark' ? 'rgb(52, 211, 153)' : 'rgb(0,0,0)';
-                            ctx.beginPath();
-                            ctx.strokeStyle = `${lineColor.replace('rgb', 'rgba').replace(')', ', ')}${1 - (distance / 100)})`;
-                            ctx.lineWidth = 1;
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-            }
-            initParticles();
-            animate();
-
-            // Intersection Observer to trigger fade-in animations on scroll
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
+                    if (distance < maxDistance) {
+                        const force = (maxDistance - distance) / maxDistance;
+                        const directionX = forceDirectionX * force * -repulsionFactor;
+                        const directionY = forceDirectionY * force * -repulsionFactor;
+                        this.x += directionX;
+                        this.y += directionY;
                     } else {
-                         // Optional: remove class when it goes out of view
-                         // entry.target.classList.remove('is-visible');
+                        // Natural floating movement
+                        this.x += this.vx;
+                        this.y += this.vy;
+                        
+                        // Bounce off walls
+                        if (this.x > canvas.width || this.x < 0) this.vx *= -1;
+                        if (this.y > canvas.height || this.y < 0) this.vy *= -1;
                     }
-                });
-            }, {
-                rootMargin: "0px",
-                threshold: 0.1 // Triggers when 10% of the element is visible
-            });
+                    
+                    this.draw();
+                }
+            }
 
-            document.querySelectorAll('.fade-in-up').forEach(section => {
-                observer.observe(section);
-            });
+            function init() {
+                particleArray.length = 0; // Clear existing particles
+                const numberOfParticles = Math.floor((canvas.width * canvas.height) / 9000);
+                const colors = ['#0066ff', '#00d4ff', '#1e40af', '#3b82f6'];
+
+                for (let i = 0; i < numberOfParticles; i++) {
+                    const size = Math.random() * 5 + 1;
+                    const x = Math.random() * (canvas.width - size * 2) + size;
+                    const y = Math.random() * (canvas.height - size * 2) + size;
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    particleArray.push(new Particle(x, y, size, color, 1));
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+                for (let i = 0; i < particleArray.length; i++) {
+                    particleArray[i].update();
+                }
+                
+                requestAnimationFrame(animate);
+            }
+
+            init();
+            animate();
         };
+
+        // Add enhanced loading state
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+            type();
+        });
+        
+        console.log('🚀 Portfolio website loaded successfully!');
+        console.log('✨ All animations and interactions are ready!');
     </script>
 </body>
 </html>
