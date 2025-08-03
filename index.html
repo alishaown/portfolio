@@ -397,6 +397,11 @@
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 20px 40px rgba(0, 102, 255, 0.5);
         }
+        
+        .funky-btn:active {
+            transform: translateY(0) scale(0.95);
+            box-shadow: 0 10px 20px rgba(0, 102, 255, 0.5);
+        }
 
         .funky-btn-outline {
             border: 3px solid var(--electric-blue);
@@ -419,18 +424,41 @@
             box-shadow: 0 20px 40px rgba(0, 102, 255, 0.4);
         }
 
-        /* Enhanced fade-in animation */
-        .fade-in {
+        /* Punch animation for about section */
+        .about-punch {
             opacity: 0;
-            transform: translateY(50px) scale(0.9);
+            transform: scale(0.8) translateY(100px);
             transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        .fade-in.visible {
+        .about-punch.visible {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: scale(1) translateY(0);
         }
 
+        /* Punch Trail effect */
+        .punch-trail {
+            position: fixed;
+            background: var(--electric-blue);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease-out;
+            z-index: 10000;
+        }
+        .punch-trail.animate {
+            animation: trail-spread 0.8s ease-out forwards;
+        }
+        @keyframes trail-spread {
+            0% {
+                transform: scale(0.2) translate(-50%, -50%);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2) translate(-50%, -50%);
+                opacity: 0;
+            }
+        }
+        
         /* Mobile menu styles */
         .mobile-menu {
             transform: translateX(100%);
@@ -605,18 +633,13 @@
         <!-- About Section -->
         <section id="about" class="py-20 px-4">
             <div class="container mx-auto">
-                <h2 class="section-title fade-in">About Me</h2>
-                <div class="flex flex-col md:flex-row items-center justify-center space-y-10 md:space-y-0 md:space-x-16">
-                    <div class="md:w-1/3 fade-in">
-                        <img src="https://placehold.co/400x400/0066ff/ffffff?text=Md+Shaown" alt="Md Shaown" class="rounded-full blue-glow object-cover w-64 h-64 mx-auto md:mx-0">
-                    </div>
-                    <div class="md:w-2/3 max-w-2xl text-center md:text-left fade-in">
-                        <h3 class="text-3xl font-bold mb-4">Hello There!</h3>
-                        <p class="text-lg text-gray-400 mb-6">
-                            Diligent Product Manager offering around 2 years of success in product roadmap development, market research and data analysis. Driven and strategic with a proven history of superior market penetration and product launch. My background in computer science and web development gives me a unique perspective on bridging the gap between business goals and technical feasibility.
-                        </p>
-                        <a href="#contact" class="funky-btn">Let's Connect</a>
-                    </div>
+                <h2 class="section-title about-punch">About Me</h2>
+                <div class="max-w-4xl mx-auto text-center about-punch">
+                    <h3 class="text-3xl font-bold mb-4">Hello There!</h3>
+                    <p class="text-lg text-gray-400 mb-6">
+                        Diligent Product Manager offering around 2 years of success in product roadmap development, market research and data analysis. Driven and strategic with a proven history of superior market penetration and product launch. My background in computer science and web development gives me a unique perspective on bridging the gap between business goals and technical feasibility.
+                    </p>
+                    <button id="punch-btn" class="funky-btn">Let's Connect</button>
                 </div>
             </div>
         </section>
@@ -899,7 +922,8 @@
             setTheme('dark');
         }
 
-        // Intersection Observer for fade-in animations
+        // Intersection Observer for fade-in and punch animations
+        const punchElements = document.querySelectorAll('.about-punch');
         const fadeElements = document.querySelectorAll('.fade-in');
         const observerOptions = {
             root: null,
@@ -914,6 +938,8 @@
                 }
             });
         }, observerOptions);
+
+        punchElements.forEach(el => observer.observe(el));
         fadeElements.forEach(el => observer.observe(el));
 
         // Mobile menu toggle
@@ -1044,6 +1070,52 @@
             init();
             animate();
         };
+
+        // Punch Effect Logic
+        const punchBtn = document.getElementById('punch-btn');
+        if (punchBtn) {
+            punchBtn.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior if it's an anchor tag
+                
+                const clickX = e.clientX;
+                const clickY = e.clientY;
+                
+                const createTrail = () => {
+                    for (let i = 0; i < 20; i++) {
+                        const trail = document.createElement('span');
+                        trail.className = 'punch-trail';
+                        trail.style.left = `${clickX}px`;
+                        trail.style.top = `${clickY}px`;
+                        const size = Math.random() * 10 + 5;
+                        trail.style.width = `${size}px`;
+                        trail.style.height = `${size}px`;
+                        document.body.appendChild(trail);
+
+                        const angle = Math.random() * 360;
+                        const distance = Math.random() * 100 + 50;
+                        const translateX = distance * Math.cos(angle);
+                        const translateY = distance * Math.sin(angle);
+                        
+                        setTimeout(() => {
+                            trail.style.transform = `translate(${translateX}px, ${translateY}px) scale(0)`;
+                            trail.style.opacity = '0';
+                        }, 50);
+
+                        trail.addEventListener('transitionend', () => {
+                            trail.remove();
+                        });
+                    }
+                };
+
+                createTrail();
+                
+                // Navigate to contact section after the effect
+                setTimeout(() => {
+                    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+                }, 500);
+            });
+        }
+
 
         // Add enhanced loading state
         window.addEventListener('load', () => {
