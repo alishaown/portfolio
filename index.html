@@ -386,11 +386,11 @@
                             </div>
                         </div>
                         <div class="animate-in hidden lg:block">
-                            <div class="card text-center p-8">
-                                <div class="w-32 h-32 bg-gradient-to-br from-primary to-accent rounded-full mx-auto mb-6 flex items-center justify-center">
-                                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                            <div id="hero-card" class="card text-center p-8">
+                                <div id="hero-card-icon-container" class="w-32 h-32 bg-gradient-to-br from-primary to-accent rounded-full mx-auto mb-6 flex items-center justify-center">
+                                    <svg id="hero-card-icon" class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                                 </div>
-                                <h3 class="heading-md mb-4">Product Strategy</h3>
+                                <h3 id="hero-card-heading" class="heading-md mb-4">Product Strategy</h3>
                                 <p class="text-muted">Turning complex problems into simple, user-focused solutions</p>
                             </div>
                         </div>
@@ -577,6 +577,50 @@
             const statusButton = document.getElementById('status-button');
             const statusText = document.getElementById('status-text');
             const statusDot = document.getElementById('status-dot');
+            
+            // Hero card elements for dynamic content
+            const heroCard = document.getElementById('hero-card');
+            const heroCardIconContainer = document.getElementById('hero-card-icon-container');
+            const heroCardHeading = document.getElementById('hero-card-heading');
+            let animationInterval = null;
+            let currentStateIndex = 0;
+
+            const cardStates = [
+                {
+                    heading: "Product Strategy",
+                    icon: `<svg id="hero-card-icon" class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`
+                },
+                {
+                    heading: "Product Vision",
+                    icon: `<svg id="hero-card-icon" class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`
+                },
+                {
+                    heading: "Product Roadmap",
+                    icon: `<svg id="hero-card-icon" class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`
+                }
+            ];
+            
+            function updateCardContent() {
+                currentStateIndex = (currentStateIndex + 1) % cardStates.length;
+                heroCardHeading.textContent = cardStates[currentStateIndex].heading;
+                heroCardIconContainer.innerHTML = cardStates[currentStateIndex].icon;
+            }
+
+            heroCard.addEventListener('mouseenter', () => {
+                // Clear any existing interval to prevent issues
+                if (animationInterval) clearInterval(animationInterval);
+                // Start the animation, changing content every 1.5 seconds
+                animationInterval = setInterval(updateCardContent, 1500);
+            });
+
+            heroCard.addEventListener('mouseleave', () => {
+                // Stop the animation and reset to the first state
+                if (animationInterval) clearInterval(animationInterval);
+                currentStateIndex = 0;
+                heroCardHeading.textContent = cardStates[0].heading;
+                heroCardIconContainer.innerHTML = cardStates[0].icon;
+            });
+
 
             // --- Theme Management ---
             function setTheme(theme) {
