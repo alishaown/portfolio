@@ -313,6 +313,21 @@
             .card { padding: 1.5rem; }
             .timeline-item { gap: 1rem; }
         }
+
+        /* Card Animation Styles */
+        .card-content-wrapper {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .card-content-wrapper.fade-out {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .card-content-wrapper.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -387,11 +402,13 @@
                         </div>
                         <div class="animate-in hidden lg:block">
                             <div id="hero-card" class="card text-center p-8">
-                                <div id="hero-card-icon-container" class="w-32 h-32 bg-gradient-to-br from-primary to-accent rounded-full mx-auto mb-6 flex items-center justify-center">
-                                    <svg id="hero-card-icon" class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                                <div class="card-content-wrapper fade-in">
+                                    <div id="hero-card-icon-container" class="w-32 h-32 bg-gradient-to-br from-primary to-accent rounded-full mx-auto mb-6 flex items-center justify-center">
+                                        <svg id="hero-card-icon" class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                                    </div>
+                                    <h3 id="hero-card-heading" class="heading-md mb-4 text-white">Product Strategy</h3>
+                                    <p class="text-muted">Turning complex problems into simple, user-focused solutions</p>
                                 </div>
-                                <h3 id="hero-card-heading" class="heading-md mb-4">Product Strategy</h3>
-                                <p class="text-muted">Turning complex problems into simple, user-focused solutions</p>
                             </div>
                         </div>
                     </div>
@@ -580,6 +597,7 @@
             
             // Hero card elements for dynamic content
             const heroCard = document.getElementById('hero-card');
+            const heroCardContentWrapper = heroCard.querySelector('.card-content-wrapper');
             const heroCardIconContainer = document.getElementById('hero-card-icon-container');
             const heroCardHeading = document.getElementById('hero-card-heading');
             let animationInterval = null;
@@ -588,52 +606,88 @@
             const cardStates = [
                 {
                     heading: "Product Strategy",
-                    icon: `<svg id="hero-card-icon" class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`
+                    icon: `<svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`
                 },
                 {
                     heading: "Product Vision",
-                    icon: `<svg id="hero-card-icon" class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`
+                    icon: `<svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`
                 },
                 {
                     heading: "Product Roadmap",
-                    icon: `<svg id="hero-card-icon" class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`
+                    icon: `<svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 14l-4-4m0 0l-4 4m4-4V5m0 10v6m4-11h8a2 2 0 012 2v1a2 2 0 01-2 2h-8a2 2 0 01-2-2v-1a2 2 0 012-2z"/></svg>`
                 }
             ];
             
             function updateCardContent() {
-                currentStateIndex = (currentStateIndex + 1) % cardStates.length;
-                heroCardHeading.textContent = cardStates[currentStateIndex].heading;
-                heroCardIconContainer.innerHTML = cardStates[currentStateIndex].icon;
+                // Fade out the current content
+                heroCardContentWrapper.classList.remove('fade-in');
+                heroCardContentWrapper.classList.add('fade-out');
+
+                // Wait for the fade-out transition to complete
+                setTimeout(() => {
+                    currentStateIndex = (currentStateIndex + 1) % cardStates.length;
+                    const nextState = cardStates[currentStateIndex];
+                    
+                    heroCardHeading.textContent = nextState.heading;
+                    heroCardIconContainer.innerHTML = nextState.icon;
+
+                    // Update icon color based on theme
+                    const iconSvg = heroCardIconContainer.querySelector('svg');
+                    if (document.body.classList.contains('light-mode')) {
+                        iconSvg.classList.add('text-accent');
+                        iconSvg.classList.remove('text-white');
+                    } else {
+                        iconSvg.classList.add('text-white');
+                        iconSvg.classList.remove('text-accent');
+                    }
+
+                    // Fade in the new content
+                    heroCardContentWrapper.classList.remove('fade-out');
+                    heroCardContentWrapper.classList.add('fade-in');
+                }, 300); // This duration should match the CSS transition duration
             }
 
             heroCard.addEventListener('mouseenter', () => {
-                // Clear any existing interval to prevent issues
                 if (animationInterval) clearInterval(animationInterval);
-                // Start the animation, changing content every 1.5 seconds
-                animationInterval = setInterval(updateCardContent, 1500);
+                updateCardContent(); // Trigger the first animation immediately
+                animationInterval = setInterval(updateCardContent, 2000); // Subsequent animations every 2 seconds
             });
 
             heroCard.addEventListener('mouseleave', () => {
-                // Stop the animation and reset to the first state
                 if (animationInterval) clearInterval(animationInterval);
-                currentStateIndex = 0;
-                heroCardHeading.textContent = cardStates[0].heading;
-                heroCardIconContainer.innerHTML = cardStates[0].icon;
+                // Fade out and then reset to the original state
+                heroCardContentWrapper.classList.remove('fade-in');
+                heroCardContentWrapper.classList.add('fade-out');
+                setTimeout(() => {
+                    currentStateIndex = 0;
+                    const originalState = cardStates[0];
+                    heroCardHeading.textContent = originalState.heading;
+                    heroCardIconContainer.innerHTML = originalState.icon;
+                    // Ensure the icon color is set for the original state
+                    const iconSvg = heroCardIconContainer.querySelector('svg');
+                    iconSvg.classList.remove('text-accent');
+                    iconSvg.classList.add('text-white');
+
+                    heroCardContentWrapper.classList.remove('fade-out');
+                    heroCardContentWrapper.classList.add('fade-in');
+                }, 300);
             });
 
 
             // --- Theme Management ---
             function setTheme(theme) {
-                if (theme === 'light') {
-                    document.body.classList.add('light-mode');
-                    sunIcon.classList.remove('hidden');
-                    moonIcon.classList.add('hidden');
-                } else {
-                    document.body.classList.remove('light-mode');
-                    sunIcon.classList.add('hidden');
-                    moonIcon.classList.remove('hidden');
-                }
+                const isLight = theme === 'light';
+                document.body.classList.toggle('light-mode', isLight);
+                sunIcon.classList.toggle('hidden', !isLight);
+                moonIcon.classList.toggle('hidden', isLight);
                 localStorage.setItem('theme', theme);
+
+                // Update hero card icon color based on the new theme
+                const iconSvg = heroCardIconContainer.querySelector('svg');
+                if (iconSvg) {
+                    iconSvg.classList.toggle('text-accent', isLight);
+                    iconSvg.classList.toggle('text-white', !isLight);
+                }
             }
 
             const savedTheme = localStorage.getItem('theme') || 'dark';
