@@ -11,21 +11,21 @@
     <style>
         :root {
             /* Shared Colors */
-            --primary: #63b3ed; /* Light blue */
-            --primary-light: #81c8f1;
-            --primary-dark: #3b82f6;
-            --accent: #00d4ff; /* Electric blue */
-            --accent-light: #67e8f9;
+            --primary: #3b82f6; /* Blue-500 */
+            --primary-light: #60a5fa; /* Blue-400 */
+            --primary-dark: #2563eb; /* Blue-600 */
+            --accent: #60a5fa; /* Blue-400 */
+            --accent-light: #93c5fd; /* Blue-300 */
 
             /* Dark Mode (Default) */
-            --bg-main: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-tertiary: #334155;
-            --card-bg: #1e293b;
-            --border: #475569;
-            --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
-            --text-muted: #94a3b8;
+            --bg-main: #0f172a; /* Slate-900 */
+            --bg-secondary: #1e293b; /* Slate-800 */
+            --bg-tertiary: #334155; /* Slate-700 */
+            --card-bg: #1e293b; /* Slate-800 */
+            --border: #475569; /* Slate-600 */
+            --text-primary: #f8fafc; /* White */
+            --text-secondary: #cbd5e1; /* Slate-300 */
+            --text-muted: #94a3b8; /* Slate-400 */
             --text-primary-rgb: 248, 250, 252;
             --navbar-bg: rgba(15, 23, 42, 0.8);
             --navbar-scrolled-bg: rgba(15, 23, 42, 0.95);
@@ -33,22 +33,22 @@
 
         body.light-mode {
             /* Light Mode Overrides */
-            --bg-main: #f8fafc;
-            --bg-secondary: #f1f5f9;
-            --bg-tertiary: #e2e8f0;
-            --card-bg: #ffffff;
-            --border: #e2e8f0;
-            --text-primary: #1a365d; /* Deep navy */
-            --text-secondary: #334155;
-            --text-muted: #64748b;
-            --text-primary-rgb: 26, 54, 93;
-            --navbar-bg: rgba(248, 250, 252, 0.8);
-            --navbar-scrolled-bg: rgba(248, 250, 252, 0.95);
-            --primary: #3182ce; /* Bright blue */
-            --primary-light: #60a5fa;
-            --primary-dark: #2b6cb0;
-            --accent: #3182ce; /* Bright blue */
-            --accent-light: #38bdf8;
+            --bg-main: #ffffff; /* White */
+            --bg-secondary: #f1f5f9; /* Slate-100 */
+            --bg-tertiary: #e2e8f0; /* Slate-200 */
+            --card-bg: #f9fafb; /* Gray-50 */
+            --border: #e5e7eb; /* Gray-200 */
+            --text-primary: #111827; /* Black */
+            --text-secondary: #4b5563; /* Gray-600 */
+            --text-muted: #6b7280; /* Gray-500 */
+            --text-primary-rgb: 17, 24, 39;
+            --navbar-bg: rgba(255, 255, 255, 0.8);
+            --navbar-scrolled-bg: rgba(255, 255, 255, 0.95);
+            --primary: #3b82f6; /* Blue-500 */
+            --primary-light: #60a5fa; /* Blue-400 */
+            --primary-dark: #2563eb; /* Blue-600 */
+            --accent: #3b82f6; /* Blue-500 */
+            --accent-light: #60a5fa; /* Blue-400 */
         }
 
         * {
@@ -292,7 +292,7 @@
         .status-indicator-full { background: rgba(107, 114, 128, 0.1); border: 1px solid rgba(107, 114, 128, 0.3); color: #6b7280; }
         .status-dot { width: 8px; height: 8px; border-radius: 50%; animation: pulse 2s infinite; }
         .dot-green { background-color: #22c55e; } .dot-blue { background-color: #3b82f6; } .dot-gray { background-color: #6b7280; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.5; } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.5); } }
 
         /* Custom Cursor */
         .custom-cursor { pointer-events: none; position: fixed; width: 3rem; height: 3rem; border-radius: 9999px; background-color: rgba(var(--text-primary-rgb), 0.1); backdrop-filter: blur(10px); opacity: 0; transition: opacity 0.3s ease, transform 0.15s ease-out; transform: translate(-50%, -50%) scale(0.8); z-index: 1000; }
@@ -327,6 +327,11 @@
         .card-content-wrapper.fade-in {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Light mode icon color override */
+        body.light-mode .icon-bg svg {
+            color: var(--primary-dark) !important;
         }
     </style>
 </head>
@@ -403,10 +408,10 @@
                         <div class="animate-in hidden lg:block">
                             <div id="hero-card" class="card text-center p-8">
                                 <div class="card-content-wrapper fade-in">
-                                    <div id="hero-card-icon-container" class="w-32 h-32 bg-gradient-to-br from-primary to-accent rounded-full mx-auto mb-6 flex items-center justify-center">
-                                        <svg id="hero-card-icon" class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                                    <div id="hero-card-icon-container" class="w-32 h-32 icon-bg bg-gradient-to-br from-primary to-accent rounded-full mx-auto mb-6 flex items-center justify-center">
+                                        <svg id="hero-card-icon" class="w-16 h-16 text-white icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                                     </div>
-                                    <h3 id="hero-card-heading" class="heading-md mb-4 text-white">Product Strategy</h3>
+                                    <h3 id="hero-card-heading" class="heading-md mb-4">Product Strategy</h3>
                                     <p class="text-muted">Turning complex problems into simple, user-focused solutions</p>
                                 </div>
                             </div>
@@ -502,7 +507,7 @@
                 <div class="grid-full animate-in"><h2 class="heading-lg text-center mb-16">Featured Projects</h2></div>
                 <div class="grid-third animate-in">
                     <div class="card h-full">
-                        <div class="flex items-center gap-3 mb-4"><div class="w-12 h-12 bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div><h4 class="text-xl font-bold">GrowAffiliate</h4></div>
+                        <div class="flex items-center gap-3 mb-4"><div class="w-12 h-12 icon-bg bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center"><svg class="w-6 h-6 text-white icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div><h4 class="text-xl font-bold">GrowAffiliate</h4></div>
                         <p class="mb-6 text-secondary">An affiliate marketing software project with a focus on market analysis and product journey definition.</p>
                         <div class="flex flex-wrap gap-2 mb-6"><span class="tag">Product Strategy</span><span class="tag">Market Analysis</span><span class="tag">Project Management</span></div>
                         <a href="#" class="btn-secondary mt-auto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>View Details</a>
@@ -510,7 +515,7 @@
                 </div>
                 <div class="grid-third animate-in">
                     <div class="card h-full">
-                        <div class="flex items-center gap-3 mb-4"><div class="w-12 h-12 bg-gradient-to-br from-accent to-orange-600 rounded-lg flex items-center justify-center"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></div><h4 class="text-xl font-bold">Insight AI</h4></div>
+                        <div class="flex items-center gap-3 mb-4"><div class="w-12 h-12 icon-bg bg-gradient-to-br from-accent to-orange-600 rounded-lg flex items-center justify-center"><svg class="w-6 h-6 text-white icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></div><h4 class="text-xl font-bold">Insight AI</h4></div>
                         <p class="mb-6 text-secondary">An AI-powered analytics platform for small businesses to track customer behavior and market insights.</p>
                         <div class="flex flex-wrap gap-2 mb-6"><span class="tag">AI/ML</span><span class="tag">Market Research</span><span class="tag">Data Analysis</span></div>
                         <a href="#" class="btn-secondary mt-auto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>View Details</a>
@@ -518,7 +523,7 @@
                 </div>
                 <div class="grid-third animate-in">
                     <div class="card h-full">
-                        <div class="flex items-center gap-3 mb-4"><div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><h4 class="text-xl font-bold">Habit Sphere</h4></div>
+                        <div class="flex items-center gap-3 mb-4"><div class="w-12 h-12 icon-bg bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center"><svg class="w-6 h-6 text-white icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><h4 class="text-xl font-bold">Habit Sphere</h4></div>
                         <p class="mb-6 text-secondary">A mobile habit tracker app designed to foster positive behavioral change with gamification elements.</p>
                         <div class="flex flex-wrap gap-2 mb-6"><span class="tag">Mobile App</span><span class="tag">User Engagement</span><span class="tag">Gamification</span></div>
                         <a href="#" class="btn-secondary mt-auto"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>View Details</a>
@@ -531,10 +536,10 @@
         <section id="skills" class="py-20">
             <div class="grid-container">
                 <div class="grid-full animate-in"><h2 class="heading-lg text-center mb-16">Skills & Expertise</h2></div>
-                <div class="grid-quarter animate-in"><div class="card h-full"><div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div><h4 class="font-bold">Product Management</h4></div><ul class="space-y-3 text-sm text-muted"><li>• Product Market Analysis</li><li>• Product Analytics (Google Analytics)</li><li>• Agile Methodologies</li><li>• Product Growth Strategies</li></ul></div></div>
-                <div class="grid-quarter animate-in"><div class="card h-full"><div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 00-2 2v2a2 2 0 002 2m0 0h14"/></svg></div><h4 class="font-bold">Project & Tools</h4></div><ul class="space-y-3 text-sm text-muted"><li>• Project Management (Jira, ClickUp)</li><li>• Documentation (Coda, Notion)</li><li>• Cross-Functional Collaboration</li><li>• Customer Engagement Solutions</li></ul></div></div>
-                <div class="grid-quarter animate-in"><div class="card h-full"><div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg></div><h4 class="font-bold">Technical & Web</h4></div><ul class="space-y-3 text-sm text-muted"><li>• WordPress Development</li><li>• Web Maintenance</li><li>• HTML/CSS/JS</li><li>• Technical Documentation</li></ul></div></div>
-                <div class="grid-quarter animate-in"><div class="card h-full"><div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div><h4 class="font-bold">Communication</h4></div><ul class="space-y-3 text-sm text-muted"><li>• English: Professional</li><li>• Bangla: Native</li><li>• Stakeholder Management</li><li>• Client Relations</li></ul></div></div>
+                <div class="grid-quarter animate-in"><div class="card h-full"><div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 icon-bg bg-primary rounded-lg flex items-center justify-center"><svg class="w-5 h-5 text-white icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div><h4 class="font-bold">Product Management</h4></div><ul class="space-y-3 text-sm text-muted"><li>• Product Market Analysis</li><li>• Product Analytics (Google Analytics)</li><li>• Agile Methodologies</li><li>• Product Growth Strategies</li></ul></div></div>
+                <div class="grid-quarter animate-in"><div class="card h-full"><div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 icon-bg bg-accent rounded-lg flex items-center justify-center"><svg class="w-5 h-5 text-white icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 00-2 2v2a2 2 0 002 2m0 0h14"/></svg></div><h4 class="font-bold">Project & Tools</h4></div><ul class="space-y-3 text-sm text-muted"><li>• Project Management (Jira, ClickUp)</li><li>• Documentation (Coda, Notion)</li><li>• Cross-Functional Collaboration</li><li>• Customer Engagement Solutions</li></ul></div></div>
+                <div class="grid-quarter animate-in"><div class="card h-full"><div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 icon-bg bg-purple-600 rounded-lg flex items-center justify-center"><svg class="w-5 h-5 text-white icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg></div><h4 class="font-bold">Technical & Web</h4></div><ul class="space-y-3 text-sm text-muted"><li>• WordPress Development</li><li>• Web Maintenance</li><li>• HTML/CSS/JS</li><li>• Technical Documentation</li></ul></div></div>
+                <div class="grid-quarter animate-in"><div class="card h-full"><div class="flex items-center gap-3 mb-6"><div class="w-10 h-10 icon-bg bg-green-600 rounded-lg flex items-center justify-center"><svg class="w-5 h-5 text-white icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div><h4 class="font-bold">Communication</h4></div><ul class="space-y-3 text-sm text-muted"><li>• English: Professional</li><li>• Bangla: Native</li><li>• Stakeholder Management</li><li>• Client Relations</li></ul></div></div>
             </div>
         </section>
 
@@ -542,9 +547,9 @@
         <section id="certifications" class="py-20 section-bg">
             <div class="grid-container">
                 <div class="grid-full animate-in"><h2 class="heading-lg text-center mb-16">Certifications</h2></div>
-                <div class="grid-half animate-in"><div class="card"><div class="flex items-start gap-4"><div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div><h4 class="text-lg font-bold mb-2">Agile with Atlassian Jira</h4><p class="text-muted">Coursera</p></div></div></div></div>
-                <div class="grid-half animate-in"><div class="card"><div class="flex items-start gap-4"><div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"/></svg></div><div><h4 class="text-lg font-bold mb-2">Google M-site Certification</h4><p class="text-muted">Google</p></div></div></div></div>
-                <div class="grid-full animate-in"><div class="card"><div class="flex items-start gap-4"><div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div><div><h4 class="text-lg font-bold mb-2">B-JET (Bangladesh Japan IT Engineer Training Program)</h4><p class="text-muted">B-JET - Comprehensive IT training and cultural exchange program</p></div></div></div></div>
+                <div class="grid-half animate-in"><div class="card"><div class="flex items-start gap-4"><div class="w-12 h-12 icon-bg bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-white icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><div><h4 class="text-lg font-bold mb-2">Agile with Atlassian Jira</h4><p class="text-muted">Coursera</p></div></div></div></div>
+                <div class="grid-half animate-in"><div class="card"><div class="flex items-start gap-4"><div class="w-12 h-12 icon-bg bg-red-600 rounded-lg flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-white icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"/></svg></div><div><h4 class="text-lg font-bold mb-2">Google M-site Certification</h4><p class="text-muted">Google</p></div></div></div></div>
+                <div class="grid-full animate-in"><div class="card"><div class="flex items-start gap-4"><div class="w-12 h-12 icon-bg bg-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0"><svg class="w-6 h-6 text-white icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div><div><h4 class="text-lg font-bold mb-2">B-JET (Bangladesh Japan IT Engineer Training Program)</h4><p class="text-muted">B-JET - Comprehensive IT training and cultural exchange program</p></div></div></div></div>
             </div>
         </section>
 
@@ -606,15 +611,15 @@
             const cardStates = [
                 {
                     heading: "Product Strategy",
-                    icon: `<svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`
+                    icon: `<svg class="w-16 h-16 icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`
                 },
                 {
                     heading: "Product Vision",
-                    icon: `<svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`
+                    icon: `<svg class="w-16 h-16 icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`
                 },
                 {
                     heading: "Product Roadmap",
-                    icon: `<svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 14l-4-4m0 0l-4 4m4-4V5m0 10v6m4-11h8a2 2 0 012 2v1a2 2 0 01-2 2h-8a2 2 0 01-2-2v-1a2 2 0 012-2z"/></svg>`
+                    icon: `<svg class="w-16 h-16 icon-on-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 14l-4-4m0 0l-4 4m4-4V5m0 10v6m4-11h8a2 2 0 012 2v1a2 2 0 01-2 2h-8a2 2 0 01-2-2v-1a2 2 0 012-2z"/></svg>`
                 }
             ];
             
@@ -630,16 +635,6 @@
                     
                     heroCardHeading.textContent = nextState.heading;
                     heroCardIconContainer.innerHTML = nextState.icon;
-
-                    // Update icon color based on theme
-                    const iconSvg = heroCardIconContainer.querySelector('svg');
-                    if (document.body.classList.contains('light-mode')) {
-                        iconSvg.classList.add('text-accent');
-                        iconSvg.classList.remove('text-white');
-                    } else {
-                        iconSvg.classList.add('text-white');
-                        iconSvg.classList.remove('text-accent');
-                    }
 
                     // Fade in the new content
                     heroCardContentWrapper.classList.remove('fade-out');
@@ -663,10 +658,6 @@
                     const originalState = cardStates[0];
                     heroCardHeading.textContent = originalState.heading;
                     heroCardIconContainer.innerHTML = originalState.icon;
-                    // Ensure the icon color is set for the original state
-                    const iconSvg = heroCardIconContainer.querySelector('svg');
-                    iconSvg.classList.remove('text-accent');
-                    iconSvg.classList.add('text-white');
 
                     heroCardContentWrapper.classList.remove('fade-out');
                     heroCardContentWrapper.classList.add('fade-in');
@@ -681,13 +672,6 @@
                 sunIcon.classList.toggle('hidden', !isLight);
                 moonIcon.classList.toggle('hidden', isLight);
                 localStorage.setItem('theme', theme);
-
-                // Update hero card icon color based on the new theme
-                const iconSvg = heroCardIconContainer.querySelector('svg');
-                if (iconSvg) {
-                    iconSvg.classList.toggle('text-accent', isLight);
-                    iconSvg.classList.toggle('text-white', !isLight);
-                }
             }
 
             const savedTheme = localStorage.getItem('theme') || 'dark';
